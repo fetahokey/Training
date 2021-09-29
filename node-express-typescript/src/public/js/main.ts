@@ -35,6 +35,10 @@ new Vue({
                 model: this.model,
                 year: this.year,
             };
+             
+            // tslint:disable-next-line:no-console
+            console.log('inventory: ', inventory);
+            
             axios
                 .post('/api/inventories/add', inventory)
                 .then(()=>{

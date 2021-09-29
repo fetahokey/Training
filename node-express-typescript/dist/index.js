@@ -33,9 +33,13 @@ dotenv_1.default.config();
 // as if it where an environment variable
 const port = process.env.SERVER_PORT;
 const app = (0, express_1.default)();
+// configure express to parse JSON data
+app.use(express_1.default.json());
 // configure Express to use EJS
 app.set('views', path_1.default.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+// configure Express to serve static files in the public folder
+app.use(express_1.default.static(path_1.default.join(__dirname, 'public')));
 // configure session auth
 sessionAuth.register(app);
 // configure routes

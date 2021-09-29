@@ -38,6 +38,7 @@
                 </table>
                 <p v-if="noInventories">No items yet!</p>
             </div>
+            
             <div class="row" id="inventoryEdit">
                 <h3>Add a item</h3>
                 <form class="col s12" @submit.prevent="addInventory">
@@ -64,6 +65,7 @@
                     <button id="inventoryEditSubmit" class="btn" type="submit"><i class="material-icons right">send</i>Submit</button>
                 </form>
             </div>
+
             <div id="deleteConfirm" ref="deleteConfirm" class="modal">
                 <div class="modal-content">
                     <h4>Confirm delete</h4>

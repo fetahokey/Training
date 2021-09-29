@@ -4,7 +4,7 @@ import pgPromise from 'pg-promise';
 export const register = (app:express.Application) =>{
     const oidc = app.locals.oidc;
     const port = parseInt(process.env.PGPORT || '5433', 10);
-    
+
     const config = {
         database: process.env.PGDATABASE || 'postgres',
         host: process.env.PGHOST || 'localhost',
@@ -37,11 +37,11 @@ export const register = (app:express.Application) =>{
             // tslint:disable-next-line:no-console
             console.log(error);
             res.json({error: error.message || error});
-            
+
         }
     });
 
-    // GET api/inventories/total 
+    // GET api/inventories/total
     // get total items in the stock
     app.get('/api/inventories/total', oidc.ensureAuthenticated(), async (req:any, res)=>{
         try {
@@ -91,6 +91,10 @@ export const register = (app:express.Application) =>{
     // POST api/inventories/add
     app.post('/api/inventories/add', oidc.ensureAuthenticated(), async (req: any, res)=>{
         try {
+            // tslint:disable-next-line:no-console
+            console.log(`this is /api/inventories/add req.bode ${req.body}`);
+
+
             const userId =  req.userContext.userinfo.sub;
             const id =  await db.one(`
                 INSERT INTO inventory (user_id, brand, model, year, color)
@@ -115,9 +119,9 @@ export const register = (app:express.Application) =>{
                     , model = $[model]
                     , year = $[year]
                     , color = $[color]
-                WHERE 
+                WHERE
                     id = $[id]
-                    AND 
+                    AND
                     user_id = $[userId]
                 RETRUNING id;
             `, {userId, ...req.body});

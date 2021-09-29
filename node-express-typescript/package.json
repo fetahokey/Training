@@ -16,6 +16,11 @@
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
+  },
+  
   "keywords": [
     "TypeScript",
     "Node",

@@ -17,6 +17,8 @@ const app = express();
 
 // configure express to parse JSON data
 
+app.use( express.json() );
+
 // configure Express to use EJS
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
