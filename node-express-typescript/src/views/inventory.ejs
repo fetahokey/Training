@@ -10,11 +10,71 @@
 </head>
 <body>
     <%- include("./partials/nav") %>
-    
-    
-   <div class="container">
-       <h1 class="header"> Inventory</h1>
-       <p>Future items list of my inventory</p>
-   </div>
-</body>
+    <div class="container">
+        <div id="app">
+            <div class="row" id="inventoryList">
+                <h3>Items list</h3>
+                <table v-if="hasInventories">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Color</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="inventory in inventories">
+                            <td>{{ inventory.year }}</td>
+                            <td>{{ inventory.brand }}</td>
+                            <td>{{ inventory.model }}</td>
+                            <td>{{ inventory.color }}</td>
+                            <td>
+                                <button id="inventoryDelete" @click="confirmDeleteInventory(inventory.id)" class="btn-small"><i class="material-icons right">delete</i>Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p v-if="noInventories">No items yet!</p>
+            </div>
+            <div class="row" id="inventoryEdit">
+                <h3>Add a item</h3>
+                <form class="col s12" @submit.prevent="addInventory">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input v-model="year" ref="year" placeholder="2005" id="year" type="text" class="validate">
+                            <label for="brand">Year</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input v-model="brand" ref="brand" placeholder="Paul Reed Smith" id="brand" type="text" class="validate">
+                            <label for="brand">Brand</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input v-model="model" ref="model" placeholder="Custom 24" id="model" type="text" class="validate">
+                            <label for="model">Model</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <input v-model="color" ref="color" placeholder="Whale Blue" id="color" type="text" class="validate">
+                            <label for="model">Color</label>
+                        </div>
+                    </div>
+                    <button id="inventoryEditSubmit" class="btn" type="submit"><i class="material-icons right">send</i>Submit</button>
+                </form>
+            </div>
+            <div id="deleteConfirm" ref="deleteConfirm" class="modal">
+                <div class="modal-content">
+                    <h4>Confirm delete</h4>
+                    <p>Delete {{ selectedInventory }}?</p>
+                </div>
+                <div class="modal-footer">
+                    <button @click="deleteInventory(selectedInventoryId)" class="modal-close btn-flat">Ok</button>
+                    <button class="modal-close btn-flat">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script></body>
 </html>
