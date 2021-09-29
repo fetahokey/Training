@@ -1,3 +1,5 @@
+
+
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
@@ -22,6 +24,7 @@ sessionAuth.register(app);
 
 // configure routes
 routes.register(app);
+
 
 // start the express server
 app.listen(port, ()=> {
