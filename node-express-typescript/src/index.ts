@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import path from 'path';
-const app = express();
-
+import * as sessionAuth from './middleware/sessionAuth';
+import * as routes from './routes';
 
 // intitialize configuration
 dotenv.config();
@@ -11,20 +11,20 @@ dotenv.config();
 // as if it where an environment variable
 const port = process.env.SERVER_PORT;
 
+const app = express();
+
 // configure Express to use EJS
-app.use(express.static( path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// define a route handler for the default home page
-app.get('/', (req, res)=>{
-    // render the index template
-    res.render('index');
-});
+// configure session auth
+sessionAuth.register(app);
 
+// configure routes
+routes.register(app);
 
-// start the Express server
-app.listen(port, ()=>{
+// start the express server
+app.listen(port, ()=> {
     // tslint:disable-next-line:no-console
-    console.log(`Server started at http://localhost:${ port }`);
-});
+    console.log(`server started at http://localhost:${ port }`);
+})
