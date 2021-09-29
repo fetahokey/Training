@@ -5,7 +5,9 @@ const register = (app) => {
     const oidc = app.locals.oidc;
     // define a route handler for the default home page
     app.get('/', (req, res) => {
-        const user = req.useContext ? req.useContext.userInfo : null;
+        const user = req.userContext ? req.userContext.userinfo : null;
+        // tslint:disable-next-line:no-console
+        console.log(`GET / > The authenticated user:${user}`);
         res.render('index', { isAuthenticated: req.isAuthenticated(), user });
     });
     // define a secure handler route for the login page that redirects to /inventory
@@ -19,8 +21,10 @@ const register = (app) => {
     });
     // define a secure route handler for the inventory page
     app.get('/inventory', oidc.ensureAuthenticated(), (req, res) => {
-        const user = req.useContext ? req.useContext.userInfo : null;
-        res.render('/inventory', { isAuthenticated: req.isAuthenticated, user });
+        const user = req.userContext ? req.userContext.userinfo : null;
+        // tslint:disable-next-line:no-console
+        console.log(`GET /inventory > The authenticated user:${user}`);
+        res.render('inventory', { isAuthenticated: req.isAuthenticated(), user });
     });
 };
 exports.register = register;
