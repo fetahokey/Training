@@ -15,6 +15,8 @@ const port = process.env.SERVER_PORT;
 
 const app = express();
 
+// configure express to parse JSON data
+
 // configure Express to use EJS
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
