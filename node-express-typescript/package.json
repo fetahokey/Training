@@ -4,6 +4,7 @@
   "description": "Use TypeScript to Build a Node API with Express",
   "main": "dist/index.js",
   "scripts": {
+    "initdb": "ts-node tools/initdb",
     "clean": "rimraf dist/*",
     "copy-assets": "ts-node tools/copyAssets",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
