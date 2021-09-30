@@ -2,7 +2,7 @@
     <div class="nav-wrapper">
         <a href="/" class="brand-logo"><% if ( user ) { %><%= user.name %>'s <% } %>Inventory</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="/inventory">My Guitars</a></li>
+            <li><a href="/inventory">My Inventory</a></li>
             <% if ( isAuthenticated ) { %>
             <li><a href="/logout">Logout</a></li>
             <% } %>

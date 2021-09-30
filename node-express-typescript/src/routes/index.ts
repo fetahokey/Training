@@ -7,8 +7,7 @@ export const register = (app: express.Application) =>{
     // define a route handler for the default home page
     app.get('/', (req:any, res)=>{
         const user = req.userContext ? req.userContext.userinfo : null;
-         // tslint:disable-next-line:no-console
-        console.log(`GET / > The authenticated user:${ user }`);
+
 
         res.render('index', {isAuthenticated: req.isAuthenticated(), user});
     });
@@ -20,6 +19,10 @@ export const register = (app: express.Application) =>{
 
     // define route to handle logout
     app.get('/logout', (req:any, res)=>{
+
+        // tslint:disable-next-line:no-console
+        console.log(`GET /Logout > !!`);
+
         req.logout();
         res.redirect('/');
     });
@@ -27,8 +30,7 @@ export const register = (app: express.Application) =>{
     // define a secure route handler for the inventory page
     app.get('/inventory',oidc.ensureAuthenticated() ,(req:any, res)=>{
         const user = req.userContext ? req.userContext.userinfo: null;
-         // tslint:disable-next-line:no-console
-         console.log(`GET /inventory > The authenticated user:${ user }`);
+
 
         res.render('inventory', {isAuthenticated: req.isAuthenticated(), user});
     })
